@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+    default-src 'self';
+    script-src 'self';
+    style-src 'self' 'unsafe-inline';
+    connect-src 'self' https://tityproperty.com;
+  "
+    />
+
+    <title>Tity Property | Login</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f4f6f8;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        width: 900px;
+        height: 560px;
+        /* width: 100%;
+        height: 100%; */
+        display: flex;
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        overflow: hidden;
+      }
+
+      .left {
+        width: 45%;
+        background: linear-gradient(135deg, #2f6de6, #6bbf59);
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .left img {
+        width: 130px;
+        margin-bottom: 20px;
+      }
+
+      .right {
+        width: 55%;
+        padding: 40px 50px;
+      }
+
+      h2 {
+        margin: 0;
+      }
+      .sub {
+        color: #777;
+        margin-bottom: 20px;
+      }
+
+      .roles {
+        display: flex;
+        background: #eee;
+        border-radius: 30px;
+        padding: 4px;
+        margin-bottom: 20px;
+      }
+
+      .roles button {
+        flex: 1;
+        border: none;
+        background: transparent;
+        padding: 10px;
+        border-radius: 25px;
+        cursor: pointer;
+      }
+
+      .roles .active {
+        background: #2f6de6;
+        color: white;
+      }
+
+      .field {
+        margin-bottom: 15px;
+      }
+
+      .field label {
+        font-size: 14px;
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .field input {
+        width: 100%;
+        padding: 11px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+      }
+
+      .password-box {
+        position: relative;
+      }
+
+      .eye {
+        position: absolute;
+        right: 12px;
+        top: 38px;
+        cursor: pointer;
+      }
+
+      .remember {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        margin-bottom: 20px;
+      }
+
+      .login {
+        width: 100%;
+        padding: 12px;
+        background: #2f6de6;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .corp {
+        margin-top: 10px;
+        background: #6b5ce7;
+        color: white;
+        border: none;
+        padding: 12px;
+        width: 100%;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .signup {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .signup-link {
+        cursor: pointer;
+        color: #2f6de6;
+      }
+
+      .signup-link:hover {
+        /* text-decoration: underline; */
+        text-decoration:dashed  ;
+      }
+
+      footer {
+        font-size: 12px;
+        color: #888;
+        text-align: center;
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="left">
+        <img src="./TityLogo.png" />
+        <h1>Tity Property</h1>
+      </div>
+
+      <div class="right">
+        <h2>Welcome to <span id="role">User</span> Login</h2>
+        <div class="sub">Sign in to continue</div>
+
+        <div class="roles">
+          <button class="active" data-role="user">User</button>
+          <button data-role="agent">Agent</button>
+          <button data-role="banker">Banker</button>
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input id="email" type="email" placeholder="Enter Your Mail Id" />
+        </div>
+
+        <div class="field password-box">
+          <label>Password</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="Enter Your Password"
+          />
+          <span class="eye" id="toggleEye">👁️</span>
+        </div>
+
+        <div class="remember">
+          <label><input type="checkbox" id="remember" /> Remember me</label>
+          <span style="color: #2f6de6; cursor: pointer">Forgot Password?</span>
+        </div>
+
+        <button class="login">Login</button>
+        <button class="corp">Corporate Login</button>
+
+        <div class="signup signup-link">
+          Don’t have an account? <b class="signup signup-link">Sign Up</b> <b id="signupRole" class="signup signup-link">User</b>
+        </div>
+
+        <footer>
+          <h4>
+            © <span id="year"></span> All Rights Reserved By Tity Property
+            Powered By Tity Global Pvt Ltd
+          </h4>
+        </footer>
+      </div>
+    </div>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

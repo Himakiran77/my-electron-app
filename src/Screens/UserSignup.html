@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- CSP SAFE -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'"
+    />
+
+    <title>Tity Property | User Signup</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f5f7fb;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .card {
+        width: 460px;
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 30px 34px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+      }
+
+      .logo {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .logo img {
+        width: 90px;
+      }
+
+      h1 {
+        text-align: center;
+        margin: 10px 0 4px;
+        font-size: 24px;
+        color: #222;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #777;
+        margin-bottom: 24px;
+      }
+
+      .field {
+        margin-bottom: 14px;
+      }
+
+      .field label {
+        font-size: 14px;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 6px;
+        color: #333;
+      }
+
+      .field input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+        outline: none;
+      }
+
+      .field input:focus {
+        border-color: #2f6de6;
+      }
+
+      .password-box {
+        position: relative;
+      }
+
+      .eye {
+        position: absolute;
+        right: 12px;
+        top: 38px;
+        cursor: pointer;
+      }
+
+      .signup-btn {
+        width: 100%;
+        margin-top: 20px;
+        padding: 14px;
+        background: linear-gradient(135deg, #1d2bff, #2339ff);
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(29, 43, 255, 0.35);
+      }
+
+      .signup-btn:hover {
+        opacity: 0.95;
+      }
+
+      .login-link {
+        margin-top: 18px;
+        text-align: center;
+        font-size: 14px;
+        color: #555;
+        cursor: pointer;
+      }
+
+      .login-link span {
+        color: #1d2bff;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .login-link :hover {
+        opacity: 0.95;
+      }
+
+      footer {
+        margin-top: 20px;
+        font-size: 12px;
+        color: #999;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <div class="logo">
+        <img src="./TityLogo.png" alt="Tity Property" />
+      </div>
+
+      <h1>Create An User Account</h1>
+      <div class="subtitle">Join us today!</div>
+
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" placeholder="Enter Your Name..." />
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input type="email" placeholder="Enter Your Email..." />
+      </div>
+
+      <div class="field">
+        <label>Mobile Number</label>
+        <input type="tel" placeholder="Enter Your Mobile Number..." />
+      </div>
+
+        <div class="field password-box">
+          <label>Password</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="At least 6 characters"
+          />
+          <span class="eye" id="toggleEye">👁️</span>
+        </div>
+
+      <button class="signup-btn">SignUp User</button>
+
+      <div class="login-link">
+        Already have an account? <span id="backToLogin">Log In</span>
+      </div>
+
+      <footer>
+        © <span id="year"></span> Tity Property · Powered by Tity Global Pvt Ltd
+      </footer>
+    </div>
+
+    <script src="usersignup.js"></script>
+  </body>
+</html>
