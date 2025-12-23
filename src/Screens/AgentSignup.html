@@ -1,18 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgentSignup</title>
-</head>
-<body>
-    <button id="backToLogin">Back to Login</button>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tity Property | Agent Signup</title>
 
-<script>
-  document.getElementById("backToLogin").addEventListener("click", () => {
-    window.electronAPI.navigate("Login");
-  });
-</script>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline';"
+    />
 
-</body>
+    <style>
+      :root {
+        --primary: #0d6efd;
+        --secondary: #f4f6f9;
+        --text-dark: #1f2937;
+        --text-light: #6b7280;
+        --border: #e5e7eb;
+        --radius: 10px;
+      }
+
+      * {
+        box-sizing: border-box;
+        font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont;
+      }
+
+      body {
+        margin: 0;
+        background: linear-gradient(120deg, #eef2ff, #f8fafc);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container {
+        width: 1100px;
+        background: #fff;
+        border-radius: 16px;
+        padding: 40px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .header img {
+        width: 80px;
+        margin-bottom: 10px;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 30px;
+        color: var(--text-dark);
+      }
+
+      .header p {
+        color: var(--text-light);
+        margin-top: 5px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+
+      .section-title {
+        grid-column: span 2;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: var(--text-dark);
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 8px;
+        color: #1e3a8a;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 6px;
+        color: var(--text-dark);
+      }
+
+      input,
+      select {
+        height: 44px;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        padding: 0 12px;
+        font-size: 14px;
+        outline: none;
+        transition: 0.2s;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+      }
+
+      .file-box {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 44px;
+        border: 1px dashed var(--border);
+        border-radius: var(--radius);
+        padding: 0 12px;
+        cursor: pointer;
+        color: var(--text-light);
+        transition: 0.2s;
+      }
+
+      .file-box:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+
+      .file-box input {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .checkbox {
+        grid-column: span 2;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        color: var(--text-dark);
+        margin-top: 10px;
+      }
+
+      .actions {
+        grid-column: span 2;
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+      }
+
+      .btn {
+        width: 280px;
+        height: 50px;
+        border-radius: 30px;
+        border: none;
+        background: linear-gradient(135deg, #2563eb, #0d6efd);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(13, 110, 253, 0.35);
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+        color: var(--text-light);
+      }
+
+      .footer span {
+        color: var(--primary);
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      .rights {
+        margin-top: 20px;
+        font-size: 12px;
+        color: #999;
+        text-align: center;
+        font-weight: 800;
+      }
+
+      .footer span:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <img src="./TityLogo.png" alt="Tity Property" />
+        <h1>Create an Agent Account</h1>
+        <p>Join Tity Property today</p>
+      </div>
+
+      <div class="form-grid">
+        <div class="section-title">Personal Information</div>
+
+        <div class="field">
+          <label>Full Name *</label>
+          <input type="text" placeholder="Enter full name" />
+        </div>
+
+        <div class="field">
+          <label>Date of Birth *</label>
+          <input type="date" />
+        </div>
+
+        <div class="field">
+          <label>Gender *</label>
+          <select>
+            <option>Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Mobile Number *</label>
+          <input type="tel" placeholder="Enter mobile number" />
+        </div>
+
+        <div class="field">
+          <label>Email ID *</label>
+          <input type="email" placeholder="Enter email address" />
+        </div>
+
+        <div class="field">
+          <label>Password *</label>
+          <input type="password" placeholder="Minimum 6 characters" />
+        </div>
+
+        <div class="section-title">Verification Details</div>
+
+        <div class="field">
+          <label>Select ID Proof *</label>
+          <select>
+            <option>Select</option>
+            <option>Aadhaar Card</option>
+            <option>PAN Card</option>
+            <option>Driving License</option>
+            <option>Passport</option>
+            <option>Voter ID</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Upload ID Proof *</label>
+          <div class="file-box">
+            Choose File (PDF / JPG / PNG)
+            <input type="file" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Select Address Proof *</label>
+          <select>
+            <option>Select</option>
+            <option>Aadhaar Card</option>
+            <option>Utility Bill</option>
+            <option>Bank Statement</option>
+            <option>Passport</option>
+            <option>Ration Card</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Upload Address Proof *</label>
+          <div class="file-box">
+            Choose File (PDF / JPG / PNG)
+            <input type="file" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Signature *</label>
+          <div class="file-box">
+            Upload Signature
+            <input type="file" />
+          </div>
+        </div>
+
+        <div class="checkbox">
+          <input type="checkbox" />
+          <span>
+            I hereby declare that the information provided above is true and
+            correct.
+          </span>
+        </div>
+
+        <div class="actions">
+          <button class="btn">Sign Up Agent</button>
+        </div>
+      </div>
+
+      <div class="footer">
+        Already have an account?
+        <span id="backToLogin">Log In</span>
+      </div>
+
+      <footer class="rights">
+        © <span id="year"></span> All Rights Reserved By Tity Property Powered
+        By Tity Global Pvt Ltd
+      </footer>
+    </div>
+
+    <script src="AgentSignup.js"></script>
+  </body>
 </html>

@@ -1,18 +1,45 @@
 {
   "name": "my-electron-app",
   "version": "1.0.0",
+  "description": "Tity Property Desktop App",
   "main": "main.js",
+  "author": "Mudambi Himakiran",
+  "license": "ISC",
+
   "scripts": {
     "start": "electronmon . main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "electronmon .",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
+
+  "build": {
+    "appId": "com.tityproperty.desktop",
+    "productName": "Tity Property",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/**/*",
+      "!release/**/*",
+      "!.gitignore"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "src/assets/TityLogo.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+
   "devDependencies": {
-    "electron": "^39.2.7"
-  },
-  "dependencies": {
+    "electron": "^39.2.7",
+    "electron-builder": "^26.0.12",
     "electronmon": "^2.0.4"
   }
 }
