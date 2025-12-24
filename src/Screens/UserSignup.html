@@ -9,49 +9,106 @@
       content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'"
     />
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Tity Property | User Signup</title>
 
     <style>
       body {
         margin: 0;
-        font-family: "Segoe UI", Arial, sans-serif;
-        background: #f5f7fb;
+        font-family: "Segoe UI", system-ui;
+        background: #eef2ff;
         height: 100vh;
+      }
+
+      /* Desktop Wrapper */
+      .desktop-container {
         display: flex;
+        width: 100%;
+        height: 100vh;
+      }
+
+      /* Left Branding Panel */
+      .left-panel {
+        flex: 1;
+        background: linear-gradient(135deg, #2f6de6, #6bbf59);
+        color: white;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
-        align-items: center;
+        padding: 60px;
+        position: relative;
+        overflow: hidden;
       }
 
-      .card {
-        width: 460px;
-        background: #ffffff;
-        border-radius: 16px;
-        padding: 30px 34px;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+      .left-panel::before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 1px,
+          transparent 1px
+        );
+        background-size: 50px 50px;
+        opacity: 0.1;
+        animation: moveBackground 20s linear infinite;
       }
 
-      .logo {
-        text-align: center;
+      @keyframes moveBackground {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(-50px, -50px);
+        }
+      }
+
+      .brand-logo {
+        width: 110px;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .left-panel h2 {
+        font-size: 34px;
         margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
       }
 
-      .logo img {
-        width: 90px;
+      .left-panel p {
+        font-size: 16px;
+        opacity: 0.9;
+        position: relative;
+        z-index: 1;
       }
 
-      h1 {
-        text-align: center;
-        margin: 10px 0 4px;
-        font-size: 24px;
-        color: #222;
+      /* Right Form Panel */
+      .right-panel {
+        flex: 1;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 60px;
+        overflow-y: auto;
+      }
+
+      .right-panel h1 {
+        font-size: 26px;
+        margin-bottom: 6px;
+        color: #1f2937;
       }
 
       .subtitle {
-        text-align: center;
-        color: #777;
-        margin-bottom: 24px;
+        margin-bottom: 28px;
+        color: #6b7280;
       }
 
+      /* Form Fields */
       .field {
         margin-bottom: 14px;
       }
@@ -71,10 +128,17 @@
         border: 1px solid #ddd;
         font-size: 14px;
         outline: none;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
       }
 
       .field input:focus {
         border-color: #2f6de6;
+        box-shadow: 0 0 0 3px rgba(47, 109, 230, 0.1);
+      }
+
+      .field input:invalid:not(:focus):not(:placeholder-shown) {
+        border-color: #ef4444;
       }
 
       .password-box {
@@ -86,99 +150,201 @@
         right: 12px;
         top: 38px;
         cursor: pointer;
+        user-select: none;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+      }
+
+      .eye:hover {
+        opacity: 1;
+      }
+
+      /* Button */
+      .actions {
+        margin-top: 28px;
+        display: flex;
+        justify-content: center;
       }
 
       .signup-btn {
-        width: 100%;
-        margin-top: 20px;
+        width: 300px;
         padding: 14px;
+        border-radius: 14px;
         background: linear-gradient(135deg, #1d2bff, #2339ff);
-        border: none;
-        border-radius: 12px;
         color: white;
-        font-size: 16px;
+        border: none;
         font-weight: 600;
+        font-size: 16px;
         cursor: pointer;
-        box-shadow: 0 8px 20px rgba(29, 43, 255, 0.35);
+        box-shadow: 0 14px 35px rgba(29, 43, 255, 0.4);
+        transition: all 0.3s ease;
       }
 
       .signup-btn:hover {
-        opacity: 0.95;
+        transform: translateY(-2px);
+        box-shadow: 0 20px 45px rgba(29, 43, 255, 0.5);
       }
 
+      .signup-btn:active {
+        transform: translateY(0);
+      }
+
+      .signup-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      /* Login */
       .login-link {
-        margin-top: 18px;
-        text-align: center;
+        margin-top: 22px;
         font-size: 14px;
-        color: #555;
-        cursor: pointer;
+        text-align: center;
+        color: #6b7280;
       }
 
       .login-link span {
+        font-weight: 600;
         color: #1d2bff;
         cursor: pointer;
-        font-weight: 600;
+        transition: color 0.2s;
       }
 
-      .login-link :hover {
-        opacity: 0.95;
+      .login-link span:hover {
+        color: #2f6de6;
+        text-decoration: underline;
       }
 
       footer {
         margin-top: 20px;
-        font-size: 11px;
-        color: #999;
+        font-size: 12px;
+        color: #9ca3af;
         text-align: center;
-        font-weight: 800;
+        font-weight: 700;
+      }
+
+      /* Loading animation */
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 10px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .desktop-container {
+          flex-direction: column;
+          height: auto;
+        }
+
+        .left-panel,
+        .right-panel {
+          padding: 40px 20px;
+        }
+
+        .signup-btn {
+          width: 100%;
+          max-width: 300px;
+        }
       }
     </style>
   </head>
 
   <body>
-    <div class="card">
-      <div class="logo">
-        <img src="./TityLogo.png" alt="Tity Property" />
+    <div class="desktop-container">
+      <!-- LEFT SIDE -->
+      <div class="left-panel">
+        <img src="./TityLogo.png" class="brand-logo" alt="Tity Property Logo" />
+        <h2>Tity Property</h2>
+        <p>Smart Property & Banking Platform. 
+          Login to access your personalized dashboard.</p>
       </div>
 
-      <h1>Create An User Account</h1>
-      <div class="subtitle">Join us today!</div>
+      <!-- RIGHT SIDE -->
+      <div class="right-panel">
+        <form id="signupForm">
+          <h1>Create An User Account</h1>
+          <p class="subtitle">Join us today!</p>
 
-      <div class="field">
-        <label>Full Name</label>
-        <input type="text" placeholder="Enter Your Name..." />
-      </div>
+          <div class="field">
+            <label for="fullName">Full Name</label>
+            <input
+              type="text"
+              id="fullName"
+              placeholder="Enter Your Name..."
+              required
+              minlength="2"
+              maxlength="50"
+            />
+          </div>
 
-      <div class="field">
-        <label>Email</label>
-        <input type="email" placeholder="Enter Your Email..." />
-      </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter Your Email Id..."
+              required
+            />
+          </div>
 
-      <div class="field">
-        <label>Mobile Number</label>
-        <input type="tel" placeholder="Enter Your Mobile Number..." />
-      </div>
+          <div class="field">
+            <label for="mobile">Mobile Number</label>
+            <input
+              type="tel"
+              id="mobile"
+              placeholder="Enter Your Mobile Number..."
+              required
+              pattern="[0-9]{10}"
+              title="Please enter a valid 10-digit mobile number"
+            />
+          </div>
 
-        <div class="field password-box">
-          <label>Password</label>
-          <input
-            id="password"
-            type="password"
-            placeholder="At least 6 characters"
-          />
-          <span class="eye" id="toggleEye">👁️</span>
+          <div class="field password-box">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              required
+              minlength="8"
+              pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$"
+              title="Minimum 8 characters with at least one letter and one number"
+            />
+            <span class="eye" id="toggleEye">👁️</span>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="signup-btn" id="submitBtn">
+              Sign Up User
+            </button>
+          </div>
+        </form>
+
+        <div class="login-link">
+          Already have an account? <span id="backToLogin">Log In</span>
         </div>
 
-      <button class="signup-btn">SignUp User</button>
-
-      <div class="login-link">
-        Already have an account? <span id="backToLogin">Log In</span>
+        <footer>
+          © <span id="year"></span> All Rights Reserved By Tity Property Powered
+          By Tity Global Pvt Ltd
+        </footer>
       </div>
-
-      <footer>
-        © <span id="year"></span> All Rights Reserved By Tity Property Powered By Tity Global Pvt Ltd
-      </footer>
     </div>
 
-    <script src="UserSignup.js"></script>
+    <script src="UserSignup.js">
+    </script>
   </body>
 </html>

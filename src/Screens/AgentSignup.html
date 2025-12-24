@@ -2,6 +2,458 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'"
+    />
+
+    <title>Tity Property | Agent Signup</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Segoe UI", system-ui;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        margin: 0;
+        background: #eef2ff;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      /* Desktop Wrapper */
+      .desktop-container {
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        min-height: 100vh;
+      }
+
+      /* LEFT PANEL */
+      .left-panel {
+        flex: 1;
+        min-width: 0;
+        background: linear-gradient(135deg, #2f6de6, #6bbf59);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 60px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .brand-logo {
+        width: 110px;
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      .left-panel h2 {
+        font-size: 34px;
+        margin-bottom: 10px;
+      }
+
+      .left-panel p {
+        font-size: 16px;
+        opacity: 0.9;
+        max-width: 380px;
+        line-height: 1.5;
+      }
+
+      /* RIGHT PANEL - FIXED */
+      .right-panel {
+        flex: 1;
+        min-width: 0;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        padding: 40px 70px;
+        overflow-y: auto;
+        height: 100vh;
+        position: relative;
+        z-index: 2;
+      }
+
+      .right-panel h1 {
+        font-size: 26px;
+        margin-bottom: 6px;
+        color: #1f2937;
+      }
+
+      .subtitle {
+        margin-bottom: 26px;
+        color: #6b7280;
+      }
+
+      /* Section Title */
+      .section-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 28px 0 14px;
+        color: #1e3a8a;
+        border-bottom: 1px solid #e5e7eb;
+        padding-bottom: 6px;
+      }
+
+      /* Form Grid */
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 26px;
+        width: 100%;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .field.full {
+        grid-column: span 2;
+      }
+
+      label {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #374151;
+      }
+
+      input,
+      select {
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #d1d5db;
+        font-size: 14px;
+        outline: none;
+        width: 100%;
+        background: white;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: #2f6de6;
+        box-shadow: 0 0 0 3px rgba(47, 109, 230, 0.15);
+      }
+
+      /* File Upload */
+      .file-box {
+        position: relative;
+        height: 44px;
+        border: 1.5px dashed #d1d5db;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        font-size: 14px;
+        color: #6b7280;
+        cursor: pointer;
+        background: #f9fafb;
+        width: 100%;
+      }
+
+      .file-box:hover {
+        border-color: #2f6de6;
+        background: #f0f7ff;
+        color: #2f6de6;
+      }
+
+      .file-box input {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      /* Checkbox */
+      .checkbox {
+        grid-column: span 2;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-top: 10px;
+        font-size: 14px;
+        color: #374151;
+      }
+
+      .checkbox input {
+        width: auto;
+        margin-top: 4px;
+      }
+
+      /* Button */
+      .actions {
+        grid-column: span 2;
+        display: flex;
+        justify-content: center;
+        margin-top: 28px;
+      }
+
+      .signup-btn {
+        width: 300px;
+        padding: 14px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #1d2bff, #2339ff);
+        color: white;
+        border: none;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 14px 35px rgba(29, 43, 255, 0.4);
+        transition: all 0.3s ease;
+      }
+
+      .signup-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 45px rgba(29, 43, 255, 0.5);
+      }
+
+      .signup-btn:active {
+        transform: translateY(0);
+      }
+
+      /* Login */
+      .login-link {
+        margin-top: 22px;
+        font-size: 14px;
+        text-align: center;
+        color: #6b7280;
+      }
+
+      .login-link span {
+        font-weight: 600;
+        color: #1d2bff;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+
+      .login-link span:hover {
+        color: #2f6de6;
+        text-decoration: underline;
+      }
+
+      footer {
+        margin-top: 20px;
+        font-size: 12px;
+        color: #9ca3af;
+        text-align: center;
+        font-weight: 700;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 1200px) {
+        .right-panel {
+          padding: 40px 50px;
+        }
+      }
+
+      @media (max-width: 992px) {
+        .desktop-container {
+          flex-direction: column;
+          height: auto;
+          overflow-y: auto;
+        }
+        
+        .left-panel, .right-panel {
+          width: 100%;
+          height: auto;
+          min-height: auto;
+        }
+        
+        .left-panel {
+          padding: 40px;
+        }
+        
+        .right-panel {
+          padding: 30px;
+          overflow-y: visible;
+        }
+        
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .field.full {
+          grid-column: span 1;
+        }
+        
+        .actions {
+          grid-column: span 1;
+        }
+        
+        .checkbox {
+          grid-column: span 1;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .right-panel {
+          padding: 20px;
+        }
+        
+        .signup-btn {
+          width: 100%;
+          max-width: 300px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="desktop-container">
+      <!-- LEFT -->
+      <div class="left-panel">
+        <img src="./TityLogo.png" class="brand-logo" alt="Tity Property Logo" />
+        <h2>Tity Property</h2>
+        <p>
+          Become a verified agent and start managing properties, clients, and
+          transactions securely.
+        </p>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right-panel">
+        <h1>Create Agent Account</h1>
+        <p class="subtitle">Register as a verified property agent</p>
+
+        <div class="section-title">Personal Information</div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="fullName">Full Name *</label>
+            <input type="text" id="fullName" placeholder="Enter Your Full Name" required />
+          </div>
+
+          <div class="field">
+            <label for="dob">Date of Birth *</label>
+            <input type="date" id="dob" required />
+          </div>
+
+          <div class="field">
+            <label for="gender">Gender *</label>
+            <select id="gender" required>
+              <option value="">Select</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="mobile">Mobile Number *</label>
+            <input type="tel" id="mobile" placeholder="Enter Your Mobile Number" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email *</label>
+            <input type="email" id="email" placeholder="Enter Your Email Id" required />
+          </div>
+
+          <div class="field">
+            <label for="password">Password *</label>
+            <input type="password" id="password" placeholder="Enter Your Password" required />
+          </div>
+
+          <div class="section-title full">Verification Details</div>
+
+          <div class="field">
+            <label for="idProofType">ID Proof *</label>
+            <select id="idProofType" required>
+              <option value="">Select</option>
+              <option value="aadhaar">Aadhaar Card</option>
+              <option value="pan">PAN Card</option>
+              <option value="passport">Passport</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="idProofFile">Upload ID Proof *</label>
+            <div class="file-box">
+              Choose File
+              <input type="file" id="idProofFile" accept=".pdf,.jpg,.jpeg,.png" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="addressProofType">Address Proof *</label>
+            <select id="addressProofType" required>
+              <option value="">Select</option>
+              <option value="utility">Utility Bill</option>
+              <option value="bank">Bank Statement</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="addressProofFile">Upload Address Proof *</label>
+            <div class="file-box">
+              Choose File
+              <input type="file" id="addressProofFile" accept=".pdf,.jpg,.jpeg,.png" required />
+            </div>
+          </div>
+
+          <div class="field full">
+            <label for="signatureFile">Signature *</label>
+            <div class="file-box">
+              Upload Signature
+              <input type="file" id="signatureFile" accept=".jpg,.jpeg,.png" required />
+            </div>
+          </div>
+
+          <div class="checkbox">
+            <input type="checkbox" id="declaration" required />
+            <label for="declaration">I confirm that the information provided is accurate.</label>
+          </div>
+
+          <div class="actions">
+            <button class="signup-btn" type="button" id="submitBtn">Sign Up Agent</button>
+          </div>
+        </div>
+
+        <div class="login-link">
+          Already have an account? <span id="backToLogin">Log In</span>
+        </div>
+
+        <footer>
+          © <span id="year"></span> All Rights Reserved By Tity Property Powered By Tity Global Pvt Ltd
+        </footer>
+      </div>
+    </div>
+
+    <script src="AgentSignup.js">
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
     <title>Tity Property | Agent Signup</title>
 
     <meta
@@ -317,4 +769,5 @@
 
     <script src="AgentSignup.js"></script>
   </body>
-</html>
+</html> -->
+

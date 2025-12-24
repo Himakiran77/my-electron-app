@@ -174,6 +174,7 @@ async function login() {
   try {
     const response = await fetch(url, options);
     const data = await response.json();
+    const errorMsg = document.getElementById("errorMsg");
 
     if (data.status === 1) {
       let userData, storageKey;
@@ -203,11 +204,19 @@ async function login() {
         localStorage.removeItem("remembered_email");
       }
     } else {
-      alert(data.message || "Invalid email or password.");
+      errorMsg.textContent = data.message || "Invalid email or password";
+      errorMsg.style.display = "block";
+
+      passwordInput.value = "";
+      passwordInput.focus();
     }
   } catch (error) {
     console.error(error);
-    alert("Failed to connect to server.");
+    errorMsg.textContent = "Unable to connect. Please try again.";
+    errorMsg.style.display = "block";
+
+    passwordInput.value = "";
+    emailInput.focus();
   } finally {
     loginBtn.disabled = false;
     loginBtn.textContent = "Login";
@@ -229,8 +238,6 @@ signupLink.addEventListener("click", () => {
   }
 });
 
-corporateLogin.addEventListener("click", ()=> {
-  alert("Corporate Login Feature is coming soon!")
-})
-
-
+corporateLogin.addEventListener("click", () => {
+  alert("Corporate Login Feature is coming soon!");
+});

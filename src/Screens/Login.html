@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       http-equiv="Content-Security-Policy"
       content="
@@ -15,203 +16,415 @@
     <title>Tity Property | Login</title>
 
     <style>
-      body {
+      * {
+        box-sizing: border-box;
+        font-family: "Segoe UI", system-ui;
         margin: 0;
-        font-family: "Segoe UI", Arial, sans-serif;
-        background: #f4f6f8;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        padding: 0;
       }
 
-      .container {
-        width: 900px;
-        height: 560px;
-        /* width: 100%;
-        height: 100%; */
-        display: flex;
-        background: #fff;
-        border-radius: 14px;
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+      body {
+        margin: 0;
+        background: #eef2ff;
+        height: 100vh;
         overflow: hidden;
       }
 
-      .left {
-        width: 45%;
+      /* Desktop Wrapper */
+      .desktop-container {
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        min-height: 100vh;
+      }
+
+      /* LEFT PANEL */
+      .left-panel {
+        flex: 1;
+        min-width: 0;
         background: linear-gradient(135deg, #2f6de6, #6bbf59);
-        color: #fff;
+        color: white;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        padding: 60px;
+        position: relative;
+        z-index: 1;
       }
 
-      .left img {
-        width: 130px;
+      .brand-logo {
+        width: 110px;
         margin-bottom: 20px;
+        display: block;
       }
 
-      .right {
-        width: 55%;
-        padding: 40px 50px;
+      .left-panel h2 {
+        font-size: 34px;
+        margin-bottom: 10px;
       }
 
-      h2 {
-        margin: 0;
-      }
-      .sub {
-        color: #777;
-        margin-bottom: 20px;
+      .left-panel p {
+        font-size: 16px;
+        opacity: 0.9;
+        max-width: 380px;
+        line-height: 1.5;
       }
 
+      /* RIGHT PANEL */
+      .right-panel {
+        flex: 1;
+        min-width: 0;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 60px;
+        overflow-y: auto;
+        height: 100vh;
+        position: relative;
+        z-index: 2;
+      }
+
+      .right-panel h1 {
+        font-size: 26px;
+        margin-bottom: 6px;
+        color: #1f2937;
+      }
+
+      .subtitle {
+        margin-bottom: 28px;
+        color: #6b7280;
+      }
+
+      /* Role Selector */
       .roles {
         display: flex;
-        background: #eee;
-        border-radius: 30px;
-        padding: 4px;
-        margin-bottom: 20px;
+        background: #f3f4f6;
+        border-radius: 12px;
+        padding: 6px;
+        margin-bottom: 30px;
+        gap: 6px;
       }
 
       .roles button {
         flex: 1;
+        padding: 14px 10px;
         border: none;
+        border-radius: 8px;
         background: transparent;
-        padding: 10px;
-        border-radius: 25px;
+        font-weight: 600;
+        font-size: 14px;
         cursor: pointer;
+        color: #6b7280;
+        transition: all 0.3s ease;
+      }
+
+      .roles button:hover {
+        background: rgba(47, 109, 230, 0.1);
+        color: #2f6de6;
       }
 
       .roles .active {
         background: #2f6de6;
         color: white;
+        box-shadow: 0 4px 12px rgba(47, 109, 230, 0.3);
       }
 
+      /* Form Fields */
       .field {
-        margin-bottom: 15px;
+        margin-bottom: 20px;
       }
 
       .field label {
         font-size: 14px;
+        font-weight: 600;
         display: block;
         margin-bottom: 6px;
+        color: #1f2937;
       }
 
       .field input {
         width: 100%;
-        padding: 11px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
+        padding: 14px;
+        border-radius: 10px;
+        border: 1px solid #d1d5db;
+        font-size: 14px;
+        outline: none;
+        transition: all 0.3s ease;
       }
 
+      .field input:focus {
+        border-color: #2f6de6;
+        box-shadow: 0 0 0 3px rgba(47, 109, 230, 0.15);
+      }
+
+      /* Password Box */
       .password-box {
         position: relative;
       }
 
       .eye {
         position: absolute;
-        right: 12px;
-        top: 38px;
+        right: 14px;
+        top: 42px;
         cursor: pointer;
+        user-select: none;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+        font-size: 18px;
       }
 
+      .eye:hover {
+        opacity: 1;
+      }
+
+      /* Remember & Forgot */
       .remember {
         display: flex;
         justify-content: space-between;
-        font-size: 13px;
-        margin-bottom: 20px;
-      }
-
-      .login {
-        width: 100%;
-        padding: 12px;
-        background: #2f6de6;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-      }
-
-      .corp {
-        margin-top: 10px;
-        background: #6b5ce7;
-        color: white;
-        border: none;
-        padding: 12px;
-        width: 100%;
-        border-radius: 8px;
-        cursor: pointer;
-      }
-
-      .signup {
-        margin-top: 15px;
-        text-align: center;
+        align-items: center;
+        margin-bottom: 25px;
         font-size: 14px;
       }
 
-      .signup-link {
+      .remember label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #6b7280;
         cursor: pointer;
+      }
+
+      .remember input {
+        width: auto;
+        cursor: pointer;
+      }
+
+      .remember span {
+        font-weight: 600;
         color: #2f6de6;
+        cursor: pointer;
+        transition: color 0.2s;
       }
 
-      .signup-link:hover {
-        /* text-decoration: underline; */
-        text-decoration:dashed  ;
+      .remember span:hover {
+        color: #1e40af;
+        text-decoration: underline;
       }
 
-      footer {
-        font-size: 12px;
-        color: #888;
+      /* Buttons */
+      .login {
+        width: 100%;
+        padding: 16px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #1d2bff, #2339ff);
+        color: white;
+        border: none;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 14px 35px rgba(29, 43, 255, 0.4);
+        transition: all 0.3s ease;
+        margin-bottom: 12px;
+      }
+
+      .login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 45px rgba(29, 43, 255, 0.5);
+      }
+
+      .login:active {
+        transform: translateY(0);
+      }
+
+      .login:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .corp {
+        width: 100%;
+        padding: 16px;
+        border-radius: 12px;
+        background: #6b5ce7;
+        color: white;
+        border: none;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .corp:hover {
+        background: #5a4bd4;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(107, 92, 231, 0.3);
+      }
+
+      /* Sign Up Link */
+      .signup-link {
+        margin-top: 20px;
         text-align: center;
-        margin-top: 15px;
+        font-size: 14px;
+        color: #6b7280;
+        cursor: pointer;
+      }
+
+      .signup-link b {
+        font-weight: 600;
+        color: #1d2bff;
+        transition: color 0.2s;
+      }
+
+      .signup-link:hover b {
+        color: #2f6de6;
+        text-decoration: underline;
+      }
+
+      /* Footer */
+      footer {
+        margin-top: 25px;
+        font-size: 12px;
+        color: #9ca3af;
+        text-align: center;
+        font-weight: 700;
+        line-height: 1.5;
+      }
+
+      footer h4 {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      /* Responsive */
+      @media (max-width: 1200px) {
+        .right-panel {
+          padding: 50px;
+        }
+      }
+
+      @media (max-width: 992px) {
+        .desktop-container {
+          flex-direction: column;
+          height: auto;
+          overflow-y: auto;
+        }
+
+        .left-panel,
+        .right-panel {
+          width: 100%;
+          height: auto;
+          min-height: auto;
+          padding: 40px;
+        }
+
+        .left-panel {
+          text-align: center;
+          padding: 40px 30px;
+        }
+
+        .right-panel {
+          justify-content: flex-start;
+          padding: 30px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .right-panel {
+          padding: 25px;
+        }
+
+        .roles {
+          flex-direction: column;
+        }
+
+        .roles button {
+          padding: 12px;
+        }
       }
     </style>
   </head>
 
   <body>
-    <div class="container">
-      <div class="left">
-        <img src="./TityLogo.png" />
-        <h1>Tity Property</h1>
+    <div class="desktop-container">
+      <!-- LEFT PANEL -->
+      <div class="left-panel">
+        <img src="./TityLogo.png" class="brand-logo" alt="Tity Property Logo" />
+        <h2>Tity Property</h2>
+        <p>
+          Smart Property & Banking Platform. Login to access your personalized
+          dashboard.
+        </p>
       </div>
 
-      <div class="right">
-        <h2>Welcome to <span id="role">User</span> Login</h2>
-        <div class="sub">Sign in to continue</div>
+      <!-- RIGHT PANEL -->
+      <div class="right-panel">
+        <h1>Welcome to <span id="role">User</span> Login</h1>
+        <p class="subtitle">Sign in to continue to your account</p>
 
+        <!-- Role Selector -->
         <div class="roles">
           <button class="active" data-role="user">User</button>
           <button data-role="agent">Agent</button>
           <button data-role="banker">Banker</button>
         </div>
 
+        <!-- Email Field -->
         <div class="field">
           <label>Email</label>
-          <input id="email" type="email" placeholder="Enter Your Mail Id" />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter Your Mail Id"
+          />
         </div>
 
+        <!-- Password Field -->
         <div class="field password-box">
           <label>Password</label>
           <input
-            id="password"
             type="password"
+            name="password"
+            id="password"
             placeholder="Enter Your Password"
           />
           <span class="eye" id="toggleEye">👁️</span>
         </div>
 
+        <!-- Remember & Forgot -->
         <div class="remember">
           <label><input type="checkbox" id="remember" /> Remember me</label>
-          <span style="color: #2f6de6; cursor: pointer">Forgot Password?</span>
+          <span style="cursor: pointer">Forgot Password?</span>
         </div>
 
-        <button class="login">Login</button>
-        <button class="corp">Corporate Login</button>
+        <p
+          id="errorMsg"
+          style="
+            display: none;
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            font-weight: 600;
+          "
+        ></p>
 
-        <div class="signup signup-link">
-          Don’t have an account? <b class="signup signup-link">Sign Up</b> <b id="signupRole" class="signup signup-link">User</b>
+        <!-- Login Buttons -->
+        <button class="login" id="loginBtn">Login</button>
+        <button class="corp" id="corporateBtn">Corporate Login</button>
+
+        <!-- Sign Up Link -->
+        <div class="signup-link" id="signupLink">
+          Don't have an account? <b>Sign Up</b> <b id="signupRole">User</b>
         </div>
 
+        <!-- Footer -->
         <footer>
           <h4>
             © <span id="year"></span> All Rights Reserved By Tity Property
