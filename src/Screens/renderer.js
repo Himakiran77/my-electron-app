@@ -241,3 +241,9 @@ signupLink.addEventListener("click", () => {
 corporateLogin.addEventListener("click", () => {
   alert("Corporate Login Feature is coming soon!");
 });
+
+const forgotPassword = document.querySelector(".forgotPassword");
+
+forgotPassword.addEventListener("click", () => {
+  window.electronAPI.navigate("forgotPassword");
+});

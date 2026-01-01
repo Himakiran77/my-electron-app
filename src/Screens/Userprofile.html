@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tity Property - My Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2e7d32;
+      margin-bottom: 20px;
+    }
+
+    .profile-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .profile-item span:first-child {
+      font-weight: 600;
+      color: #555;
+    }
+
+    .profile-item span:last-child {
+      color: #333;
+    }
+
+    .actions {
+      margin-top: 25px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .back-btn {
+      background: #ccc;
+    }
+
+    .logout-btn {
+      background: #d32f2f;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Personal Details</h2>
+
+    <div class="profile-item">
+      <span>Full Name</span>
+      <span id="name">-</span>
+    </div>
+
+    <div class="profile-item">
+      <span>Email</span>
+      <span id="email">-</span>
+    </div>
+
+    <div class="profile-item">
+      <span>Mobile Number</span>
+      <span id="mobile">-</span>
+    </div>
+
+    <div class="actions">
+      <button class="back-btn" onclick="goBack()">Go Back</button>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    const userData = JSON.parse(localStorage.getItem("user_details"));
+    const role = localStorage.getItem("role");
+
+    if (!userData || role !== "user") {
+      alert("Session expired. Please login again.");
+      window.electronAPI.navigate("Login");
+    } else {
+      document.getElementById("name").textContent =
+        userData.name || userData.username || "-";
+
+      document.getElementById("email").textContent =
+        userData.email || "-";
+
+      document.getElementById("mobile").textContent =
+        userData.mobile || userData.phone || "-";
+
+    }
+
+    function goBack() {
+      window.electronAPI.navigate("UserDashboard");
+    }
+
+    function logout() {
+      localStorage.clear();
+      window.electronAPI.navigate("Login");
+    }
+  </script>
+</body>
+</html>
